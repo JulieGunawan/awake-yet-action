@@ -23,7 +23,8 @@ async function run(){
 
     console.log(context.payload);
     const octokit = new github.GitHub(githubToken);
-
+    const message = "hello world\n";
+    
     octokit.issues.createComment({
       ...context.repo,
       issue_number: pullRequestNumber,
