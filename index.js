@@ -17,15 +17,15 @@ var date_string = '';
 
 async function run(){
   
-    const githubToken = core.getInput("GITHUB_TOKEN");
+    const token = core.getInput("GITHUB_TOKEN");
     
     const context = github.context; 
     console.log(github);
     const pullRequestNumber = context.payload.pull_request.number;
   
-    const octokit = new github.getOctokit(githubToken);
+    const octokit = new github.getOctokit(token);
     const message = "hello world\n";
-    console.log(octokit);
+    
     const repo = context.payload.repository.name;
     // await octokit.rest.issues.createComment({
     //   repo:repo,
