@@ -23,14 +23,19 @@ async function run(){
     console.log(github);
     const pullRequestNumber = context.payload.pull_request.number;
   
-    const octokit = github.getOctokitOptions(githubToken);
+    const octokit = github.getOctokit(githubToken);
     const message = "hello world\n";
     console.log(octokit);
     const repo = context.payload.repository.name;
-    await octokit.rest.issues.createComment({
-      repo:repo,
-      issue_number: pullRequestNumber,
-      body: message,
+    // await octokit.rest.issues.createComment({
+    //   repo:repo,
+    //   issue_number: pullRequestNumber,
+    //   body: message,
+    // });
+
+    await octokit.issues.listComments({
+      ...repo,
+      issue_number: pullRequestNumber
     });
 
 }
