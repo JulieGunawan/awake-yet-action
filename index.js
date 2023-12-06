@@ -1,6 +1,6 @@
 //Core functions for setting results, logging, registering secrets and exporting variables across actions
 const core = require('@actions/core');
-const { github } = require('@actions/github');
+const github = require('@actions/github');
 const Geocoder = require('node-geocoder');
 const dotenv = require('dotenv');
 dotenv.config();
