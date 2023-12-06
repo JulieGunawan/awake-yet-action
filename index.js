@@ -21,11 +21,12 @@ async function run(){
 
     const {context} = github;
 
-    console.log(context.payload);
+    
     const pullRequestNumber = context.payload.pull_request.number;
-    const prTitle = context.payload.pull_request.title;
+  
     const octokit = new github.GitHub(githubToken);
     const message = "hello world\n";
+    console.log(octokit.issues);
 
     octokit.issues.createComment({
       ...context.repo,
