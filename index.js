@@ -20,10 +20,10 @@ async function run(){
     const githubToken = core.getInput("GITHUB_TOKEN");
     
     const context = github.context; 
-    console.log(context);
+    console.log(github);
     const pullRequestNumber = context.payload.pull_request.number;
   
-    const octokit = github.getOctokit(githubToken);
+    const octokit = github.getOctokitOptions(githubToken);
     const message = "hello world\n";
     console.log(octokit);
     const repo = context.payload.repository.name;
