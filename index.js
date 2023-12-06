@@ -19,17 +19,15 @@ async function run(){
   try{
     const githubToken = core.getInput("GITHUB_TOKEN");
 
-    const {context} = github;
-
-    
+    const {context} = github; 
     const pullRequestNumber = context.payload.pull_request.number;
   
     const octokit = new github.GitHub(githubToken);
     const message = "hello world\n";
-    console.log(octokit.issues);
+    console.log(octokit);
 
-    octokit.issues.createComment({
-      ...context.repo,
+    await octokit.rest.issues.createComment({
+      repo:repo,
       issue_number: pullRequestNumber,
       body: message,
     });
