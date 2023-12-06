@@ -33,9 +33,9 @@ async function run(){
     //   body: message,
     // });
 
-    await octokit.issues.listComments({
-      ...repo,
-      issue_number: pullRequestNumber
+    await octokit.issues.createComment({
+      repo:repo,
+      body: `An friendly hello from ${context.action} and thanks for raising a PR.`,
     });
 
 }
