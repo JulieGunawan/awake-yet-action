@@ -23,7 +23,7 @@ async function run(){
     console.log(github);
     const pullRequestNumber = context.payload.pull_request.number;
   
-    const octokit = github.Github(githubToken);
+    const octokit = new github.getOctokit(githubToken);
     const message = "hello world\n";
     console.log(octokit);
     const repo = context.payload.repository.name;
@@ -33,8 +33,9 @@ async function run(){
     //   body: message,
     // });
 
-    await octokit.issues.createComment({
-      repo:repo,
+    await octokit.rest.issues.createComment({
+      repo,
+      issue_number: pullRequestNumber,
       body: `An friendly hello from ${context.action} and thanks for raising a PR.`,
     });
 
