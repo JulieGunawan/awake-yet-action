@@ -1,4 +1,6 @@
-const { Toolkit } = require('actions-toolkit')
+//Core functions for setting results, logging, registering secrets and exporting variables across actions
+const core = require('@actions/core');
+const github = require("@actions/github");
 const Geocoder = require('node-geocoder');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -13,7 +15,27 @@ var issue_number = '';
 var date_time = '';
 var date_string = '';
 
-Toolkit.run(async tools => {
+async function run(){
+  try{
+    const githubToken = core.getInput("GITHUB_TOKEN");
+
+    const {context} = github;
+
+    console.log(context.payload);
+    const octokit = new github.GitHub(githubToken);
+
+    octokit.issues.createComment({
+      ...context.repo,
+      issue_number: pullRequestNumber,
+      body: message,
+    });
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+run();
+/*Toolkit.run(async tools => {
   // Assign repo data to variables
   const owner = tools.context.payload.repository.owner.login;
   const repo = tools.context.payload.repository.name;
@@ -119,3 +141,4 @@ Toolkit.run(async tools => {
   };
   tools.exit.success('Completed successfully!')
 });
+*/
