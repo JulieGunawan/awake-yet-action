@@ -1,6 +1,6 @@
 //Core functions for setting results, logging, registering secrets and exporting variables across actions
 const core = require('@actions/core');
-const {context, getOctokit } = require('@actions/github');
+const { github } = require('@actions/github');
 const Geocoder = require('node-geocoder');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -18,15 +18,15 @@ var date_string = '';
 async function run(){
   
     const githubToken = core.getInput("GITHUB_TOKEN");
-
-    const {payload} = context; 
-    console.log(payload);
-    const pullRequestNumber = payload.pull_request.number;
+    
+    const {context} = github; 
+    console.log(context);
+    const pullRequestNumber = context.payload.pull_request.number;
   
-    const octokit = getOctokit(getInput("GITHUB_TOKEN"), {required: true});
+    const octokit = github.getOctokit(githubToken);
     const message = "hello world\n";
     console.log(octokit);
-    const repo = payload.repository.name;
+    const repo = context.payload.repository.name;
     await octokit.rest.issues.createComment({
       repo:repo,
       issue_number: pullRequestNumber,
