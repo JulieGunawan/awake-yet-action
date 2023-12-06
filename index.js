@@ -23,7 +23,7 @@ async function run(){
     console.log(payload);
     const pullRequestNumber = payload.pull_request.number;
   
-    const octokit = getOctokit(githubToken);
+    const octokit = getOctokit(getInput("GITHUB_TOKEN"), {required: true});
     const message = "hello world\n";
     console.log(octokit);
     const repo = payload.repository.name;
