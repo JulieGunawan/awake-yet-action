@@ -16,7 +16,7 @@ var issue_number = '';
 var date_time = '';
 var date_string = '';
 
-export async function run(){
+async function run(){
   
     const token = core.getInput("GITHUB_TOKEN");
     const octokit = new Octokit({ 
