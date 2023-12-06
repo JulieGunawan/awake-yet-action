@@ -2,7 +2,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const Geocoder = require('node-geocoder');
-import { Octokit } from "octokit";
+const { Octokit } = require("@octokit/rest");
 const dotenv = require('dotenv');
 dotenv.config();
 const axios = require('axios').default;
@@ -16,9 +16,8 @@ var issue_number = '';
 var date_time = '';
 var date_string = '';
 
-async function run(){
+export async function run(){
   
-    
     const token = core.getInput("GITHUB_TOKEN");
     const octokit = new Octokit({ 
       auth: 'GITHUB_TOKEN',
